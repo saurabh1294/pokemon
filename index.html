@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<meta charset="utf-8">
+<title>Welcome to weather simulation app</title>
+
+</head>
+<body>
+
+	<div class="container text-center">
+		<h1>Welcome to the Pokemon Gallery app</h1>
+	
+		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" >
+			<p>Below is representation of pokemon gallery
+			</p>
+		</div>
+		
+	
+	</div>
+	
+	<div id="pokemonTable" ng-app="sortApp" ng-controller="sortCtrl"  ng-include="'sort.html'" >
+	</div>
+	
+	
+	
+	
+	
+	
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
+	<script src="js/d3.min.js"></script>
+	<script src="js/topojson.v1.min.js"></script>
+	
+	<!-- dev version
+	<script src="src/js/sortApp.js"></script>
+	<script src="src/js/weatherApp.js"></script> 
+	-->
+	
+	<!-- prod version -->
+	<script src="dist/prod/weather.component.min.js"></script>
+	<!-- prod version -->
+	
+	<!-- Latest compiled and minified bootstrap CSS -->
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+	<link rel="stylesheet" href="dist/prod/weather.component.min.css">
+	
+</body>
+</html>
