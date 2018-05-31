@@ -1,0 +1,85 @@
+.bg-image {
+     background-image: url("../../images/hero-background.jpg");
+     background-repeat:no-repeat;
+     background-size:contain;
+     height: 1280px;
+}
+ h3 {
+     text-align:center;
+}
+ .top-margin-15 {
+     margin-top:15px;
+}
+ .pokecontainer {
+     margin-top:40%;
+}
+ * {
+     box-sizing: border-box;
+}
+/* Create four equal columns that floats next to each other */
+ .column {
+     float: left;
+     padding: 10px;
+     height: 300px;
+    /* Should be removed. Only for demonstration */
+}
+/* Clear floats after the columns */
+ .row:after {
+     content: "";
+     display: table;
+     clear: both;
+}
+ .top-padding-10pc {
+     padding-top:15%;
+}
+/* Responsive layout media queries */
+ @media only screen and (min-width: 1200px) {
+     .column {
+         width: 25%;
+    }
+     .pok-img {
+         float: left;
+         padding: 10px;
+         width: 50%;
+    }
+     .pok-desc {
+         float: right;
+         padding: 10px;
+         width: 50%;
+         margin-top:10%;
+    }
+}
+ @media only screen and (min-width: 768px) and (max-width: 1199px) {
+     .column {
+         width: 50%;
+    }
+     .pok-img {
+         float: left;
+         padding: 10px;
+         width: 50%;
+    }
+     .pok-desc {
+         float: right;
+        /*padding: 10px;
+        */
+         width: 50%;
+         margin-top:8%;
+    }
+}
+ @media only screen and (max-width: 767px) {
+     .column {
+         width: 100%;
+    }
+     .pok-img {
+         width: 100%;
+        /*padding: 10px;
+        */
+         margin-left:40%;
+    }
+     .pok-desc {
+         width: 100%;
+        /*padding: 10px;
+        */
+         margin-left:43%;
+    }
+}

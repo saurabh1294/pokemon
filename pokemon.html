@@ -1,0 +1,79 @@
+<!DOCTYPE HTML>
+<html  ng-app="ui.bootstrap.demo">
+	<head>
+		<title>
+			Welcome to the Pokemon Galleria
+		</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="src/css/pokemon.css"/>
+		<style type="text/css">
+		</style>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
+		
+		
+		
+	</head>
+	
+	
+	<body>
+		<h3> Welcome to my pokemon gallery </h3>
+		<div class = "container img-responsives bg-image " ng-controller="PagerDemoCtrl">
+			<div class = "pokecontainer">
+				<div class="input-group col-lg-12 col-md-12 col-sm-12 top-padding-10pc">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Search Pokemon" ng-model="searchPokemon">
+				</div>
+				--here{{pagify(currentPage - 1)}}---
+				<div class="row" ng-repeat="index in pagify(currentPage) | orderBy:sortType:sortReverse | filter:searchPokemon">
+				{{$index}}
+					<!--div class="column">
+						<div class="pok-img"> <img src="images/{{index+1}}.png"></img> </div>
+						<div class = "pok-desc">
+							<div>{{$index+1}}</div>
+							<div>{{pokedata[$index].name}}</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="pok-img"> <img src="images/{{$index+2}}.png"></img> </div>
+						<div class = "pok-desc">
+							<div>{{$index+2}}</div>
+							<div>{{pokedata[$index+1].name}}</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="pok-img"> <img src="images/{{$index+3}}.png"></img> </div>
+						<div class = "pok-desc">
+							<div>{{$index+3}}</div>
+							<div>{{pokedata[$index+2].name}}</div>
+						</div>
+					</div>
+					<div class="column">
+						<div class="pok-img"> <img src="images/{{$index+4}}.png"></img> </div>
+						<div class = "pok-desc">
+							<div>{{$index+4}}</div>
+							<div>{{pokedata[$index+3].name}}</div>
+						</div>
+					</div-->
+				</div>
+				{{$index}}
+			</div>
+			
+			<pre>You are currently on page {{currentPage}} </pre>
+			{{totalItems}}-- here is tota
+			<ul uib-pager total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage" 
+			maxsize = "maxSize" ng-change="listPageChanged()"></ul>
+		</div>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+		<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+		<script src="src/js/example.js"></script>
+	</body>
+</html>
