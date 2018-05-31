@@ -1,46 +1,59 @@
-<!DOCTYPE html>
-<meta charset="utf-8">
-<title>Welcome to weather simulation app</title>
-
-</head>
-<body>
-
-	<div class="container text-center">
-		<h1>Welcome to the Pokemon Gallery app</h1>
-	
-		<div class="col-md-12 col-lg-12 col-sm-12 col-xs-12" >
-			<p>Below is representation of pokemon gallery
-			</p>
-		</div>
+<!DOCTYPE HTML>
+<html  ng-app="ui.bootstrap.demo">
+	<head>
+		<title>
+			Welcome to the Pokemon Galleria
+		</title>
+		<!-- Latest compiled and minified CSS -->
+		<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+		<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
+		<link rel="stylesheet" href="dist/prod/pokemon.component.min.css"/>
+		<style type="text/css">
+		</style>
+		<meta name="viewport" content="width=device-width,initial-scale=1" />
 		
-	
-	</div>
-	
-	<div id="pokemonTable" ng-app="sortApp" ng-controller="sortCtrl"  ng-include="'sort.html'" >
-	</div>
+		
+		
+	</head>
 	
 	
-	
-	
-	
-	
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.5.8/angular.min.js"></script>
-	<script src="js/d3.min.js"></script>
-	<script src="js/topojson.v1.min.js"></script>
-	
-	<!-- dev version
-	<script src="src/js/sortApp.js"></script>
-	<script src="src/js/weatherApp.js"></script> 
-	-->
-	
-	<!-- prod version -->
-	<script src="dist/prod/weather.component.min.js"></script>
-	<!-- prod version -->
-	
-	<!-- Latest compiled and minified bootstrap CSS -->
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/font-awesome/4.2.0/css/font-awesome.min.css">
-	<link rel="stylesheet" href="dist/prod/weather.component.min.css">
-	
-</body>
+	<body>
+		<h3> Welcome to my pokemon gallery </h3>
+		<div class = "container img-responsives bg-image " ng-controller="PagerDemoCtrl">
+			<div class = "pokecontainer">
+				<div class="input-group col-lg-12 col-md-12 col-sm-12 top-padding-10pc">
+					<div class="input-group-addon"><i class="fa fa-search"></i></div>
+					<input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Search Pokemon" ng-model="searchPokemon">
+				</div>
+				
+				
+			
+			<div class="row" ng-repeat="row in range(pokemonPerPage.length-1, cols) | filter:searchPokemon">
+				<div ng-repeat = "item in [0,1,2,3]">
+					<div class="column" ng-if="pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row]">
+						<div class="pok-img"> <img ng-src="images/{{row+$index+itemsPerPage*(currentPage-1)+1}}.png"></img> </div>
+						<div class = "pok-desc">
+							<div>#{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].url.
+							split("/").reverse()[1]}}</div>
+							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name}}</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<pre>You are currently on page {{currentPage}} </pre>
+			<ul uib-pager total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage"></ul>
+		</div>
+		<!-- jQuery library -->
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+		<!-- Latest compiled JavaScript -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+		
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-animate.js"></script>
+		<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.1/angular-sanitize.js"></script>
+		<script src="https://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-2.5.0.js"></script>
+		<script src="dist/prod/pokemon.component.min.js"></script>
+	</body>
 </html>
+

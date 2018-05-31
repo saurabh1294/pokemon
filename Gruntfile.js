@@ -21,25 +21,25 @@ module.exports = function(grunt) {
           // the files to concatenate
           src: ['src/**/*.js'],
           // the location of the resulting JS file
-          dest: 'dist/dev/weather.component.js'
+          dest: 'dist/dev/pokemon.component.js'
       },
       devcss: {
         // the files to concatenate
         src: ['src/**/*.css'],
         // the location of the resulting JS file
-        dest: 'dist/dev/weather.component.css'
+        dest: 'dist/dev/pokemon.component.css'
       }
     },
     uglify: {
       prodjs: {
         src : ['src/**/*.js'],
-        dest : 'dist/prod/weather.component.min.js'
+        dest : 'dist/prod/pokemon.component.min.js'
       }
     },
     cssmin: {
       prod: {
           files: {
-            'dist/prod/weather.component.min.css': ['src/**/*.css']
+            'dist/prod/pokemon.component.min.css': ['src/**/*.css']
           }
       }
     },
@@ -150,7 +150,8 @@ module.exports = function(grunt) {
       'sass:dev',
       'concat:devcss',
       'copy:devviews',
-      'copy:devtemplates'
+      'copy:devtemplates',
+	  'server'
   ]);
   grunt.registerTask('prod', [
       'clean:tmp',
@@ -160,7 +161,8 @@ module.exports = function(grunt) {
       'sass:dev',
       'cssmin:prod',
       'copy:prodviews',
-      'copy:prodtemplates'
+      'copy:prodtemplates',
+	  'server'
   ]);
   
 grunt.registerTask('server', 'Start a custom web server', function() {
