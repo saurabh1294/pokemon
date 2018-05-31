@@ -18,6 +18,16 @@ pokemonApp.service('pokemonService', ['$http', '$q', function($http, $q) {
 	}
 }]);
 
+pokemonApp.filter('minLength', function() {
+	return function(input, len, pad) {
+		input = input.toString();
+		if (input.length >= len) return input;
+		else {
+			pad = (pad || 0).toString();
+			return new Array(1 + len - input.length).join(pad) + input;
+		}
+	};
+});
 
 angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q', '$http', '$filter', 'pokemonService', function($scope, $q, $http, $filter, pokemonService) {
 	$scope.totalItems = 151;
@@ -45,4 +55,10 @@ angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q',
 		}
 		return input;
 	};
-}]);
+	
+	
+	
+	
+
+
+}])

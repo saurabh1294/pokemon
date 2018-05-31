@@ -34,7 +34,7 @@
 						<div class="pok-img"> <img ng-src="images/{{row+$index+itemsPerPage*(currentPage-1)+1}}.png"></img> </div>
 						<div class = "pok-desc">
 							<div>#{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].url.
-							split("/").reverse()[1]}}</div>
+							split("/").reverse()[1] | minLength:3}}</div>
 							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name}}</div>
 						</div>
 					</div>
