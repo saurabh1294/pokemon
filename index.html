@@ -23,19 +23,19 @@
 			<div class = "pokecontainer">
 				<div class="input-group col-lg-12 col-md-12 col-sm-12 top-padding-10pc">
 					<div class="input-group-addon"><i class="fa fa-search"></i></div>
-					<input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Search Pokemon" ng-model="searchPokemon">
+					<input type="text" class="form-control ng-pristine ng-valid ng-empty ng-touched" placeholder="Search Pokemon" ng-model="searchString">
 				</div>
 				
 				
 			
-			<div class="row" ng-repeat="row in range(pokemonPerPage.length-1, cols) | filter:searchPokemon">
+			<div class="row" ng-repeat="row in range(pokemonPerPage.length-1, cols)">
 				<div ng-repeat = "item in [0,1,2,3]">
 					<div class="column" ng-if="pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row]">
 						<div class="pok-img"> <img ng-src="images/{{row+$index+itemsPerPage*(currentPage-1)+1}}.png"></img> </div>
 						<div class = "pok-desc">
 							<div>#{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].url.
-							split("/").reverse()[1] | minLength:3}}</div>
-							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name}}</div>
+							split("/").reverse()[1] | minLength:3 | searchFor:[searchString, pokedata]}}</div>
+							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name | searchFor:[searchString, pokedata]}}</div>
 						</div>
 					</div>
 				</div>

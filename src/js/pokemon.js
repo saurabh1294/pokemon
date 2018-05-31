@@ -29,22 +29,49 @@ pokemonApp.filter('minLength', function() {
 	};
 });
 
+pokemonApp.filter('searchFor', function(){
+
+	// All filters must return a function. The first parameter
+	// is the data that is to be filtered, and the second is an
+	// argument that may be passed with a colon (searchFor:searchString)
+
+	return function(arr, params){
+		
+
+		if(!params[0]){
+			return arr;
+		}
+
+		var result = [];
+
+		params[0] = params[0].toLowerCase();
+
+		
+		
+		angular.forEach(params[1], function(item){
+
+			if(item.name.toLowerCase().indexOf(params[0]) !== -1 || item.url.toLowerCase().indexOf(params[0] !== -1)){
+				result.push(item.url || item.name);
+			}
+
+		});
+		console.log(result, "RESULT");
+		return result;
+	};
+
+});
+
 angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q', '$http', '$filter', 'pokemonService', function($scope, $q, $http, $filter, pokemonService) {
 	$scope.totalItems = 151;
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 20;
 	$scope.cols = 4; // column layout for desktop
+	$scope.searchPokemon = '';
 
 	// make web service call here and fetch all data including page numbers
 	pokemonService.getPokeData().then(function(response) {
 		$scope.pokedata = response;
 		$scope.pokemonPerPage = $scope.pokedata.slice((($scope.currentPage - 1) * $scope.itemsPerPage), (($scope.currentPage) * $scope.itemsPerPage));
-		
-		$scope.$watch('searchPokemon', function(query) {
-			$scope.pokedata = query ? $filter('filter')($scope.pokedata, query) : $scope.pokedata;
-			$scope.$$apply;
-		});
-
 	});
 
 	$scope.range = function(max, step) {
@@ -55,10 +82,4 @@ angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q',
 		}
 		return input;
 	};
-	
-	
-	
-	
-
-
 }])
