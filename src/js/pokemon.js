@@ -49,20 +49,22 @@ pokemonApp.filter('searchFor', function(){
 		
 		
 		angular.forEach(params[1], function(item){
-
-			if(item.name.toLowerCase().indexOf(params[0]) !== -1 || item.url.toLowerCase().indexOf(params[0] !== -1)){
-				result.push(item.url || item.name);
+			if(item.name.search(params[0]) !== -1 || item.url.search(params[0].replace(/[#0]+/g,'')) !== -1){
+				result.push(item);
 			}
 
 		});
-		console.log(result, "RESULT");
+		
+		if (params[2]) {
+			params[2].totalItems = result.length;
+		}
 		return result;
 	};
 
 });
 
 angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q', '$http', '$filter', 'pokemonService', function($scope, $q, $http, $filter, pokemonService) {
-	$scope.totalItems = 151;
+	//$scope.totalItems = 151;
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 20;
 	$scope.cols = 4; // column layout for desktop
@@ -71,6 +73,7 @@ angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q',
 	// make web service call here and fetch all data including page numbers
 	pokemonService.getPokeData().then(function(response) {
 		$scope.pokedata = response;
+		$scope.totalItems = ($scope.pokedata.results) ? $scope.pokedata.results.length : 151;
 		$scope.pokemonPerPage = $scope.pokedata.slice((($scope.currentPage - 1) * $scope.itemsPerPage), (($scope.currentPage) * $scope.itemsPerPage));
 	});
 
@@ -82,4 +85,8 @@ angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q',
 		}
 		return input;
 	};
+	
+	$scope.getImage = function(row) {
+		return row.url.split("/")[row.url.split("/").length - 2];
+	}
 }])

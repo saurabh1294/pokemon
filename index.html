@@ -28,21 +28,36 @@
 				
 				
 			
-			<div class="row" ng-repeat="row in range(pokemonPerPage.length-1, cols)">
+			<div class="row" ng-repeat="row in range(pokemonPerPage.length-1, cols)" ng-if="!searchString">
 				<div ng-repeat = "item in [0,1,2,3]">
 					<div class="column" ng-if="pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row]">
 						<div class="pok-img"> <img ng-src="images/{{row+$index+itemsPerPage*(currentPage-1)+1}}.png"></img> </div>
 						<div class = "pok-desc">
 							<div>#{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].url.
-							split("/").reverse()[1] | minLength:3 | searchFor:[searchString, pokedata]}}</div>
-							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name | searchFor:[searchString, pokedata]}}</div>
+							split("/").reverse()[1] | minLength:3}}</div>
+							<div>{{pokedata.slice(((currentPage-1)*itemsPerPage), ((currentPage)*itemsPerPage))[item+row].name}}</div>
 						</div>
 					</div>
 				</div>
 			</div>
 			
-			<pre>You are currently on page {{currentPage}} </pre>
-			<ul uib-pager total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage"></ul>
+			
+			
+			<h2 style="color:blue" ng-if = "searchString">Search Results</h2>
+			<div class="row" style="border:1px solid blue;" ng-repeat="row in (pokedata | searchFor : [searchString, pokedata, this])" ng-if="searchString">
+				<!--div ng-repeat = "item in [0,1,2,3]"-->
+					<div class="column">
+						<div class="pok-img"> <img ng-src="images/{{ getImage(row) }}.png"></img> </div>
+							<div class = "pok-desc">
+								<div>#{{ row.url.split("/")[row.url.split("/").length - 2] | minLength : 3}}</div>
+								<div>{{row.name}}</div>
+							</div>
+					</div>
+				<!--/div-->
+			</div>
+			
+			<pre ng-if="!searchString">You are currently on page {{currentPage}} </pre>
+			<ul ng-if="!searchString" uib-pager total-items="totalItems" items-per-page="itemsPerPage" ng-model="currentPage"></ul>
 		</div>
 		<!-- jQuery library -->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -56,4 +71,3 @@
 		<script src="dist/prod/pokemon.component.min.js"></script>
 	</body>
 </html>
-
