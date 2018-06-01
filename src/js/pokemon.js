@@ -36,8 +36,8 @@ pokemonApp.filter('searchFor', function(){
 	// argument that may be passed with a colon (searchFor:searchString)
 
 	return function(arr, params){
+		var totalItems;
 		
-
 		if(!params[0]){
 			return arr;
 		}
@@ -56,15 +56,21 @@ pokemonApp.filter('searchFor', function(){
 		});
 		
 		if (params[2]) {
+			totalItems = params[2].totalItems;	// save total items
 			params[2].totalItems = result.length;
 		}
+		
+		if (params[2].searchString.length === 1) {
+			params[2].totalItems = 151;
+		}
+		//console.log(result, result.length, params[0], "params2 = ", params[2].searchString);
+		params[2].$$apply;
 		return result;
 	};
 
 });
 
 angular.module('ui.bootstrap.demo').controller('PagerDemoCtrl', ['$scope', '$q', '$http', '$filter', 'pokemonService', function($scope, $q, $http, $filter, pokemonService) {
-	//$scope.totalItems = 151;
 	$scope.currentPage = 1;
 	$scope.itemsPerPage = 20;
 	$scope.cols = 4; // column layout for desktop
